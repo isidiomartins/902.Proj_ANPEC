@@ -82,27 +82,27 @@ function validateQuestions(questions) {
 /**
  * Preenche os filtros de ano e matéria com base nas questões disponíveis
  */
-function populateFilters() {
+function populateYearFilter() {
   const yearSelect = document.getElementById('year');
   const subjectSelect = document.getElementById('subject');
   
-  // Limpa opções existentes (mantendo apenas "Todos/Todas")
+  // Limpa e mantém a primeira opção
   yearSelect.innerHTML = '<option value="all">Todos</option>';
   subjectSelect.innerHTML = '<option value="all">Todas</option>';
   
-  // Obtém anos e matérias únicos
+  // Obtém valores únicos
   const years = [...new Set(state.questions.map(q => q.year))].sort((a, b) => b - a);
   const subjects = [...new Set(state.questions.map(q => q.subject))].sort();
-  
-  // Preenche anos
+
+  // Preenche anos (mantendo o nome original da função por compatibilidade)
   years.forEach(year => {
     const option = document.createElement('option');
     option.value = year;
     option.textContent = year;
     yearSelect.appendChild(option);
   });
-  
-  // Preenche matérias
+
+  // Adiciona o preenchimento de matérias (novo)
   subjects.forEach(subject => {
     const option = document.createElement('option');
     option.value = subject;
@@ -118,26 +118,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     showLoading();
     await loadQuestions();
-    populateFilters(); // Alterado para a nova função
+    populateYearFilter(); // Continua chamando com o mesmo nome
     hideLoading();
   } catch (error) {
-    // ... tratamento de erro existente ...
+    showError(`Erro ao carregar questões: ${error.message}`);
+    hideLoading();
   }
   
   // ... resto do código ...
-});
-
-// Preenche filtro de anos
-//function populateYearFilter() {
-//  const years = [...new Set(state.questions.map(q => q.year))].sort((a, b) => b - a);
-//  years.forEach(year => {
-//    const option = document.createElement('option');
-//    option.value = year;
-//    option.textContent = year;
-//    DOM.yearSelect.appendChild(option);
-//  });
-//}
-
+  });
+  
 // Aplica filtros
 function applyFilters() {
   state.activeFilters = {
