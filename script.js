@@ -79,16 +79,64 @@ function validateQuestions(questions) {
   });
 }
 
-// Preenche filtro de anos
-function populateYearFilter() {
+/**
+ * Preenche os filtros de ano e matéria com base nas questões disponíveis
+ */
+function populateFilters() {
+  const yearSelect = document.getElementById('year');
+  const subjectSelect = document.getElementById('subject');
+  
+  // Limpa opções existentes (mantendo apenas "Todos/Todas")
+  yearSelect.innerHTML = '<option value="all">Todos</option>';
+  subjectSelect.innerHTML = '<option value="all">Todas</option>';
+  
+  // Obtém anos e matérias únicos
   const years = [...new Set(state.questions.map(q => q.year))].sort((a, b) => b - a);
+  const subjects = [...new Set(state.questions.map(q => q.subject))].sort();
+  
+  // Preenche anos
   years.forEach(year => {
     const option = document.createElement('option');
     option.value = year;
     option.textContent = year;
-    DOM.yearSelect.appendChild(option);
+    yearSelect.appendChild(option);
+  });
+  
+  // Preenche matérias
+  subjects.forEach(subject => {
+    const option = document.createElement('option');
+    option.value = subject;
+    option.textContent = subject;
+    subjectSelect.appendChild(option);
   });
 }
+
+// E no evento DOMContentLoaded, substitua a chamada para populateYearFilter por:
+document.addEventListener('DOMContentLoaded', async () => {
+  // ... código existente ...
+  
+  try {
+    showLoading();
+    await loadQuestions();
+    populateFilters(); // Alterado para a nova função
+    hideLoading();
+  } catch (error) {
+    // ... tratamento de erro existente ...
+  }
+  
+  // ... resto do código ...
+});
+
+// Preenche filtro de anos
+//function populateYearFilter() {
+//  const years = [...new Set(state.questions.map(q => q.year))].sort((a, b) => b - a);
+//  years.forEach(year => {
+//    const option = document.createElement('option');
+//    option.value = year;
+//    option.textContent = year;
+//    DOM.yearSelect.appendChild(option);
+//  });
+//}
 
 // Aplica filtros
 function applyFilters() {
