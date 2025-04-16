@@ -42,7 +42,7 @@
             "id": 2,
             "year": 2024,
             "subject": "Microeconomia",
-            "question": "Seja \( p = (p_1, ..., p_n) \) o vetor de preços, todos estritamente positivos, seja \( r > 0 \) a renda do consumidor e \( \\overline{u} \) um nível de utilidade. Denote por \( x(p, r) \) o vetor de demandas marshallianas dos \( n \) bens sob o vetor de preços \( p \) e renda \( r \), por \( v(p, r) \) a utilidade indireta sob o vetor de preços \( p \) e renda \( r \), por \( e(p, \\overline{u}) \) a função dispêndio sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \) e por \( h(p, \\overline{u}) \) o vetor de demandas hicksianas dos \( n \) bens sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \). Julgue as afirmativas abaixo como verdadeiras ou falsas:",
+            "question": "Seja \\( p = (p_1, ..., p_n) \\) o vetor de preços, todos estritamente positivos, seja \\( r > 0 \\) a renda do consumidor e \\( \\overline{u} \\) um nível de utilidade. Denote por \\( x(p, r) \\) o vetor de demandas marshallianas dos \( n \) bens sob o vetor de preços \( p \) e renda \( r \), por \( v(p, r) \) a utilidade indireta sob o vetor de preços \( p \) e renda \( r \), por \( e(p, \\overline{u}) \) a função dispêndio sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \) e por \( h(p, \\overline{u}) \) o vetor de demandas hicksianas dos \( n \) bens sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \). Julgue as afirmativas abaixo como verdadeiras ou falsas:",
             "items": [
                 {
                     "number": 1,
