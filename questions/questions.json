@@ -75,6 +75,13 @@
           "explanation": "Falso. A matriz de substituição \\( S \\) (jacobiano das demandas hicksianas) é simétrica e semidefinida negativa devido às propriedades da minimização de custos, mas não é antissimétrica. Além disso, \\( Sp = 0_n \\) é uma consequência do lema de Shephard, mas a antissimetria não é uma propriedade geral dessa matriz."
         }
       ]
+    },
+    {
+      "id": 3,
+      "year": 2023,
+      "subject": "Econometria",
+      "question": "...",
+      "items": []
     }
   ]
 }
