@@ -1,0 +1,43 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "year": 2024,
+        "subject": "Microeconomia",
+        "question": "Há apenas duas empresas produtoras de barracas de praia: a empresa Praia e a empresa Verão. A demanda inversa de barracas de praia é dada por: $P = 64 - 4Q$, onde $P$ representa o preço e $Q$ representa a quantidade procurada. Suponha que o custo marginal das duas empresas seja constante e igual a \\$32 por barraca. Cada empresa possui custos fixos de \\$10, e pode produzir somente quantidades discretas de barracas.",
+        "items": [
+          {
+            "number": 0,
+            "statement": "Se as duas empresas entrarem em conluio e decidirem agir como um monopólio, dividindo o mercado equitativamente, cada empresa produzirá 1 unidade.",
+            "answer": "F",
+            "explanation": "Falso. A quantidade ótima de monopólio é Q=4 (RMg=CMg → 64-8Q=32 → Q=4), dividida igualmente: 2 unidades por empresa, não 1."
+          },
+          {
+            "number": 1,
+            "statement": "Se as duas empresas entrarem em conluio e decidirem agir como um monopólio, cada empresa terá um lucro de \\$22.",
+            "answer": "V",
+            "explanation": "Verdadeiro. Com Q=4 (P=48), lucro por empresa = (48-32)*2 - 10 = \\$22."
+          },
+          {
+            "number": 2,
+            "statement": "A empresa Praia não possui incentivo para burlar o acordo e produzir a quantidade de 3 unidades.",
+            "answer": "F",
+            "explanation": "Falso. Há incentivo para burlar (dumping) conforme modelo de Cournot."
+          },
+          {
+            "number": 3,
+            "statement": "O lucro da empresa Verão é de \\$18, se a empresa Praia produzir 3 unidades.",
+            "answer": "V",
+            "explanation": "Verdadeiro. Se Praia produz 3, Verão maximiza lucro com Q=2.5 (não inteiro), então Q=2: lucro = (40-32)*2 - 10 = \\$18."
+          },
+          {
+            "number": 4,
+            "statement": "Se ambas as empresas estabelecerem um acordo em que cada empresa produz 3 unidades, a empresa Praia não terá incentivo para burlar o acordo e produzir 4 unidades.",
+            "answer": "F",
+            "explanation": "Falso. Produzir 4 unidades seria lucrativo (dumping), rompendo o acordo."
+          }
+        ]
+      }
+    ]
+  }
+  
