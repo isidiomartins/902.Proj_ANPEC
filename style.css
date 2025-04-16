@@ -1,0 +1,232 @@
+/* ===== ESTILOS GERAIS ===== */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  gap: 1.5rem;
+}
+
+/* ===== FILTROS ===== */
+.filters {
+  width: 280px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 1rem;
+}
+
+.filter-group {
+  margin-bottom: 1.2rem;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+#apply-filters {
+  width: 100%;
+}
+
+/* ===== QUESTÕES E ITENS ===== */
+.question-container {
+  flex: 1;
+}
+
+.question-header {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#question-subject {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.8rem;
+}
+
+#question-text {
+  line-height: 1.7;
+}
+
+.items-container {
+  margin-top: 1rem;
+}
+
+.item-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.item-statement {
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.answer-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-true,
+.btn-false {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-true {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.btn-false {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.btn-true:hover,
+.btn-false:hover {
+  opacity: 0.9;
+}
+
+.correct {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.incorrect {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.explanation {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #6c757d;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+#prev-item,
+#next-item {
+  width: 120px;
+}
+
+#item-counter {
+  font-weight: bold;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .filters {
+    width: auto;
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ===== EFEITOS PARA EQUAÇÕES ===== */
+.katex {
+  font-size: 1.05em !important;
+}
+
+/* ===== ERROS ===== */
+.error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #dc3545;
+}
+
+.error ul {
+  padding-left: 1.5rem;
+}
+
+/* ===== DEBUG ===== */
+.debug {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
