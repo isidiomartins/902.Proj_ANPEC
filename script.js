@@ -1,126 +1,228 @@
-let questionsData = [];
-let currentQuestionIndex = 0;
-let currentItemIndex = 0;
+// Estado da aplicação
+const state = {
+  questions: [],
+  filteredQuestions: [],
+  currentIndex: 0,
+  activeFilters: {
+    subject: 'all',
+    year: 'all'
+  }
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('questions/questions.json')
-    .then(response => response.json())
-    .then(data => {
-      questionsData = data.questions;
-      populateYearFilter();
-    })
-    .catch(error => showError(`Erro ao carregar questões: ${error.message}`));
+// Elementos do DOM
+const DOM = {
+  subjectSelect: document.getElementById('subject'),
+  yearSelect: document.getElementById('year'),
+  applyFiltersBtn: document.getElementById('apply-filters'),
+  questionSubject: document.getElementById('question-subject'),
+  questionText: document.getElementById('question-text'),
+  itemsContainer: document.getElementById('items-container'),
+  prevBtn: document.getElementById('prev-item'),
+  nextBtn: document.getElementById('next-item'),
+  itemCounter: document.getElementById('item-counter'),
+  errorBox: document.getElementById('error-message'),
+  loadingIndicator: document.getElementById('loading-indicator'),
+  currentYear: document.getElementById('current-year')
+};
 
-  document.getElementById('apply-filters').addEventListener('click', applyFilters);
-  document.getElementById('prev-item').addEventListener('click', () => navigateItem(-1));
-  document.getElementById('next-item').addEventListener('click', () => navigateItem(1));
+// Inicialização
+document.addEventListener('DOMContentLoaded', async () => {
+  // Atualiza ano no footer
+  DOM.currentYear.textContent = new Date().getFullYear();
+
+  try {
+    showLoading();
+    await loadQuestions();
+    populateYearFilter();
+    hideLoading();
+  } catch (error) {
+    showError(`Erro ao carregar questões: ${error.message}`);
+    hideLoading();
+  }
+
+  // Event listeners
+  DOM.applyFiltersBtn.addEventListener('click', applyFilters);
+  DOM.prevBtn.addEventListener('click', () => navigateQuestion(-1));
+  DOM.nextBtn.addEventListener('click', () => navigateQuestion(1));
 });
 
+// Carrega questões do JSON
+async function loadQuestions() {
+  try {
+    const response = await fetch('questions/questions.json');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    
+    const data = await response.json();
+    validateQuestions(data.questions);
+    
+    state.questions = data.questions;
+    state.filteredQuestions = data.questions;
+  } catch (error) {
+    throw new Error(`Falha ao carregar questões: ${error.message}`);
+  }
+}
+
+// Valida estrutura das questões
+function validateQuestions(questions) {
+  if (!Array.isArray(questions)) {
+    throw new Error('Formato inválido: questions deve ser um array');
+  }
+
+  questions.forEach((q, i) => {
+    if (!q.id || !q.year || !q.subject || !q.question || !q.items) {
+      throw new Error(`Questão ${i + 1} está incompleta ou mal formatada`);
+    }
+
+    if (!Array.isArray(q.items)) {
+      throw new Error(`Itens da questão ${q.id} devem ser um array`);
+    }
+  });
+}
+
+// Preenche filtro de anos
 function populateYearFilter() {
-  const yearSelect = document.getElementById('year');
-  const years = [...new Set(questionsData.map(q => q.year))].sort((a, b) => b - a);
+  const years = [...new Set(state.questions.map(q => q.year))].sort((a, b) => b - a);
   years.forEach(year => {
     const option = document.createElement('option');
     option.value = year;
     option.textContent = year;
-    yearSelect.appendChild(option);
+    DOM.yearSelect.appendChild(option);
   });
 }
 
+// Aplica filtros
 function applyFilters() {
-  const subject = document.getElementById('subject').value;
-  const year = document.getElementById('year').value;
+  state.activeFilters = {
+    subject: DOM.subjectSelect.value,
+    year: DOM.yearSelect.value
+  };
 
-  const filtered = questionsData.filter(q =>
-    (subject === 'all' || q.subject === subject) &&
-    (year === 'all' || q.year == year)
+  state.filteredQuestions = state.questions.filter(q =>
+    (state.activeFilters.subject === 'all' || q.subject === state.activeFilters.subject) &&
+    (state.activeFilters.year === 'all' || q.year == state.activeFilters.year)
   );
 
-  if (filtered.length === 0) {
+  if (state.filteredQuestions.length === 0) {
     showError('Nenhuma questão encontrada com os filtros selecionados.');
     return;
   }
 
+  state.currentIndex = 0;
   hideError();
-  currentQuestionIndex = 0;
-  loadQuestion(filtered);
+  renderQuestion();
 }
 
-function loadQuestion(filteredQuestions) {
-  const question = filteredQuestions[currentQuestionIndex];
-  document.getElementById('question-subject').textContent = `${question.subject} — ${question.year}`;
-  document.getElementById('question-text').innerHTML = question.question;
+// Renderiza questão atual
+function renderQuestion() {
+  if (state.filteredQuestions.length === 0) return;
 
-  const container = document.getElementById('items-container');
-  container.innerHTML = '';
+  const question = state.filteredQuestions[state.currentIndex];
+  DOM.questionSubject.textContent = `${question.subject} — ${question.year}`;
+  DOM.questionText.innerHTML = question.question;
 
-  question.items.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'item-card';
+  // Renderiza KaTeX após atualizar o conteúdo
+  setTimeout(() => {
+    renderMathInElement(DOM.questionText, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+      ],
+      throwOnError: false
+    });
+  }, 0);
 
-    const statement = document.createElement('div');
-    statement.className = 'item-statement';
-    statement.innerHTML = item.statement;
-
-    const buttons = document.createElement('div');
-    buttons.className = 'answer-buttons';
-
-    const trueBtn = document.createElement('button');
-    trueBtn.className = 'btn-true';
-    trueBtn.textContent = 'Verdadeiro';
-    trueBtn.onclick = () => checkAnswer(true, item, card);
-
-    const falseBtn = document.createElement('button');
-    falseBtn.className = 'btn-false';
-    falseBtn.textContent = 'Falso';
-    falseBtn.onclick = () => checkAnswer(false, item, card);
-
-    buttons.append(trueBtn, falseBtn);
-    card.append(statement, buttons);
-    container.appendChild(card);
-  });
-
-  document.getElementById('item-counter').textContent = `Questão ${currentQuestionIndex + 1} de ${filteredQuestions.length}`;
+  renderItems(question.items);
+  updateCounter();
 }
 
-function checkAnswer(userAnswer, item, card) {
+// Renderiza itens da questão
+function renderItems(items) {
+  DOM.itemsContainer.innerHTML = items.map(item => `
+    <div class="item-card" data-item-id="${item.number}">
+      <div class="item-statement">${item.statement}</div>
+      <div class="answer-buttons">
+        <button class="btn-true" onclick="checkAnswer(true, ${item.number}, this.parentElement.parentElement)">
+          Verdadeiro
+        </button>
+        <button class="btn-false" onclick="checkAnswer(false, ${item.number}, this.parentElement.parentElement)">
+          Falso
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  // Renderiza KaTeX nos itens
+  setTimeout(() => {
+    renderMathInElement(DOM.itemsContainer, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+      ],
+      throwOnError: false
+    });
+  }, 0);
+}
+
+// Verifica resposta do usuário
+function checkAnswer(userAnswer, itemNumber, cardElement) {
+  const question = state.filteredQuestions[state.currentIndex];
+  const item = question.items.find(i => i.number === itemNumber);
+  
+  if (!item) return;
+
   const isCorrect = (userAnswer ? 'V' : 'F') === item.answer;
-  card.classList.add(isCorrect ? 'correct' : 'incorrect');
-
+  
+  cardElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+  cardElement.querySelector('.answer-buttons').remove();
+  
   const explanation = document.createElement('div');
   explanation.className = 'explanation';
   explanation.textContent = item.explanation;
-
-  card.querySelector('.answer-buttons').remove();
-  card.appendChild(explanation);
+  cardElement.appendChild(explanation);
 }
 
-function navigateItem(direction) {
-  const subject = document.getElementById('subject').value;
-  const year = document.getElementById('year').value;
+// Navega entre questões
+function navigateQuestion(direction) {
+  if (state.filteredQuestions.length === 0) return;
 
-  const filtered = questionsData.filter(q =>
-    (subject === 'all' || q.subject === subject) &&
-    (year === 'all' || q.year == year)
-  );
+  state.currentIndex += direction;
 
-  if (filtered.length === 0) return;
+  if (state.currentIndex < 0) {
+    state.currentIndex = state.filteredQuestions.length - 1;
+  } else if (state.currentIndex >= state.filteredQuestions.length) {
+    state.currentIndex = 0;
+  }
 
-  currentQuestionIndex += direction;
-
-  if (currentQuestionIndex < 0) currentQuestionIndex = filtered.length - 1;
-  if (currentQuestionIndex >= filtered.length) currentQuestionIndex = 0;
-
-  loadQuestion(filtered);
+  renderQuestion();
 }
 
+// Atualiza contador
+function updateCounter() {
+  DOM.itemCounter.textContent = 
+    `Questão ${state.currentIndex + 1} de ${state.filteredQuestions.length}`;
+}
+
+// Mostra erro
 function showError(message) {
-  const errorBox = document.getElementById('error-message');
-  errorBox.style.display = 'block';
-  errorBox.innerHTML = `<strong>Erro:</strong> ${message}`;
+  DOM.errorBox.style.display = 'block';
+  DOM.errorBox.innerHTML = `<strong>Erro:</strong> ${message}`;
 }
 
+// Esconde erro
 function hideError() {
-  const errorBox = document.getElementById('error-message');
-  errorBox.style.display = 'none';
+  DOM.errorBox.style.display = 'none';
+}
+
+// Mostra loading
+function showLoading() {
+  DOM.loadingIndicator.style.display = 'flex';
+}
+
+// Esconde loading
+function hideLoading() {
+  DOM.loadingIndicator.style.display = 'none';
 }
