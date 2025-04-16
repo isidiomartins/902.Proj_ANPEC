@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Resolva questões de edições anteriores da ANPEC com explicações detalhadas e filtros personalizados. Treine gratuitamente!" />
+    <meta name="keywords" content="ANPEC, questões ANPEC, microeconomia, macroeconomia, estatística, economia brasileira, exame ANPEC, estudar ANPEC" />
+    <meta name="author" content="Seu Nome ou Marca" />
+    <title>Banco de Questões ANPEC — Estude de Forma Inteligente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Banco de Questões ANPEC</h1>
+      <p class="subtitle">Resolva questões de edições anteriores com explicações detalhadas</p>
+    </header>
+
+    <div class="container">
+      <aside class="filters">
+        <h2>Filtrar Questões</h2>
+        <div class="filter-group">
+          <label for="subject">Matéria</label>
+          <select id="subject">
+            <option value="all">Todas</option>
+            <option value="Microeconomia">Microeconomia</option>
+            <option value="Macroeconomia">Macroeconomia</option>
+            <option value="Estatística">Estatística</option>
+            <option value="Economia Brasileira">Economia Brasileira</option>
+            <option value="Matemática">Matemática</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="year">Ano</label>
+          <select id="year">
+            <option value="all">Todos</option>
+          </select>
+        </div>
+        <button id="apply-filters">Aplicar Filtros</button>
+      </aside>
+
+      <main class="question-container">
+        <section class="question-header">
+          <h2 id="question-subject">Selecione um filtro para iniciar</h2>
+          <div id="question-text"></div>
+        </section>
+
+        <section class="items-container" id="items-container"></section>
+
+        <nav class="navigation">
+          <button id="prev-item">Anterior</button>
+          <span id="item-counter">Item 0/0</span>
+          <button id="next-item">Próximo</button>
+        </nav>
+
+        <div id="error-message" class="error" style="display: none;"></div>
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 — Banco de Questões ANPEC | Desenvolvido por [Seu Nome]</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
