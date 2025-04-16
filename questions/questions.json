@@ -38,6 +38,44 @@
           }
         ]
       }
+    {
+            "id": 2,
+            "year": 2024,
+            "subject": "Microeconomia",
+            "question": "Seja \( p = (p_1, ..., p_n) \) o vetor de preços, todos estritamente positivos, seja \( r > 0 \) a renda do consumidor e \( \\overline{u} \) um nível de utilidade. Denote por \( x(p, r) \) o vetor de demandas marshallianas dos \( n \) bens sob o vetor de preços \( p \) e renda \( r \), por \( v(p, r) \) a utilidade indireta sob o vetor de preços \( p \) e renda \( r \), por \( e(p, \\overline{u}) \) a função dispêndio sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \) e por \( h(p, \\overline{u}) \) o vetor de demandas hicksianas dos \( n \) bens sob o vetor de preços \( p \) e nível de utilidade \( \\overline{u} \). Julgue as afirmativas abaixo como verdadeiras ou falsas:",
+            "items": [
+                {
+                    "number": 1,
+                    "statement": "\( x(p, r) = h(p, v(p, r)) \).",
+                    "answer": "V",
+                    "explanation": "Verdadeiro. As demandas marshallianas e hicksianas coincidem quando a utilidade indireta é igual ao nível de utilidade \( \\overline{u} \), ou seja, \( x(p, r) = h(p, v(p, r)) \). Isso é uma propriedade fundamental da dualidade na teoria do consumidor."
+                },
+                {
+                    "number": 2,
+                    "statement": "\( e(p, v(p, r)) = r \).",
+                    "answer": "V",
+                    "explanation": "Verdadeiro. A função dispêndio \( e(p, \\overline{u}) \) retorna a renda mínima necessária para alcançar o nível de utilidade \( \\overline{u} \) aos preços \( p \). Como \( v(p, r) \) é a utilidade máxima alcançável com renda \( r \), \( e(p, v(p, r)) = r \) deve ser verdadeiro."
+                },
+                {
+                    "number": 3,
+                    "statement": "Seja \( U(x_1, ..., x_n) = \\min \\bigl\\{\\frac{x_1}{a_1}, ..., \\frac{x_n}{a_n}\\bigr\\} \), com \( a_1, ..., a_n > 0 \), uma utilidade Leontiev. Então \( e(p, \\overline{u}) = (a_1p_1 + ... + a_np_n)/\\overline{u} \).",
+                    "answer": "F",
+                    "explanation": "Falso. Para uma função de utilidade Leontief, a função dispêndio correta é \( e(p, \\overline{u}) = \\overline{u} \\cdot (a_1p_1 + ... + a_np_n) \), pois o dispêndio mínimo para alcançar \( \\overline{u} \) é proporcional à soma ponderada dos preços pelos coeficientes \( a_i \). A expressão dada está incorreta."
+                },
+                {
+                    "number": 4,
+                    "statement": "Se vale o princípio da valoração marginal decrescente, então a função dispêndio \( e(p, \\overline{u}) \) é estritamente convexa nos preços.",
+                    "answer": "V",
+                    "explanation": "Verdadeiro. O princípio da valoração marginal decrescente está associado à convexidade das preferências. A função dispêndio é convexa nos preços, refletindo que o custo mínimo para alcançar um nível de utilidade aumenta a uma taxa não decrescente quando os preços aumentam."
+                },
+                {
+                    "number": 5,
+                    "statement": "A matriz \( S = [s_{ij}]_{n \\times n} \), definida como o jacobiano de \( h(p, \\overline{u}) \) relativamente aos preços, isto é, \( s_{ij} = \\frac{\\partial h_i}{\\partial p_j} \), para \( i,j = 1, ..., n \), é antissimétrica, semidefinida negativa e satisfaz \( Sp = 0_n \), em que \( 0_n \) denota o vetor nulo n-dimensional.",
+                    "answer": "F",
+                    "explanation": "Falso. A matriz de substituição \( S \) (jacobiano das demandas hicksianas) é simétrica e semidefinida negativa devido às propriedades da minimização de custos, mas não é antissimétrica. Além disso, \( Sp = 0_n \) é uma consequência do lema de Shephard, mas a antissimetria não é uma propriedade geral dessa matriz."
+                }
+            ]
+        }
     ]
   }
   
