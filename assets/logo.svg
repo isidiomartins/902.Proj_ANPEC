@@ -1,0 +1,21 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo circular -->
+  <circle cx="128" cy="128" r="120" fill="#2C3E50"/>
+  
+  <!-- Símbolo de gráfico/livro -->
+  <path d="M80 80V176H176V80H80Z" fill="#3498DB" stroke="#ECF0F1" stroke-width="4"/>
+  <path d="M80 80L128 40L176 80" fill="#3498DB" stroke="#ECF0F1" stroke-width="4"/>
+  
+  <!-- Linhas do gráfico -->
+  <path d="M100 120L140 100" stroke="#F1C40F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 140L140 130" stroke="#2ECC71" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 160L140 150" stroke="#E74C3C" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Símbolo de integral (representando matemática) -->
+  <path d="M180 120C185 110 195 110 200 120C205 130 195 140 180 140" stroke="#ECF0F1" stroke-width="3" fill="none"/>
+  <path d="M180 140L200 140" stroke="#ECF0F1" stroke-width="3"/>
+  
+  <!-- Texto -->
+  <text x="128" y="210" font-family="Arial" font-size="24" font-weight="bold" fill="#ECF0F1" text-anchor="middle">ANPEC</text>
+  <text x="128" y="235" font-family="Arial" font-size="14" fill="#BDC3C7" text-anchor="middle">Questões</text>
+</svg>
