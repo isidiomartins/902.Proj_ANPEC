@@ -2,3 +2,5 @@
     Sub-tópicos das matérias
 
 2. Como monetizar?
+
+Uma ferramenta de ia aclopada ao comentario para permitir ao usuario gerar informação complementar.
